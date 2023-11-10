@@ -1,11 +1,4 @@
 "use client";
-export const metadata = {
-    icons: {
-        icon: '../../public/favicon.png',
-    },
-  title: 'A-GroTech',
-  description: 'Page description',
-}
 
 import Hero from '@/components/hero'
 import Features from '@/components/features'
@@ -17,9 +10,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Features />
-      <Testimonials />
-      <Newsletter />
     </>
   )
 }
