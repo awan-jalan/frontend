@@ -1,48 +1,75 @@
-import VideoThumb from '@/public/images/modal.png'
-import ModalVideo from '@/components/modal-video'
+import VideoThumb from "@/public/images/modal.png";
+import ModalVideo from "@/components/modal-video";
+import { useRouter } from 'next/navigation'
 
 export default function Hero() {
+  const route = useRouter()
+  const handleClick = (e : any) => {
+    e.preventDefault()
+    route.push("./result")
+  }
   return (
     <section className="relative">
-
-      {/* Illustration behind hero content */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1" aria-hidden="true">
-        {/*<svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="illustration-01">
-              <stop stopColor="#FFF" offset="0%" />
-              <stop stopColor="#EAEAEA" offset="77.402%" />
-              <stop stopColor="#DFDFDF" offset="100%" />
-            </linearGradient>
-          </defs>
-          <g fill="url(#illustration-01)" fillRule="evenodd">
-            <circle cx="1232" cy="128" r="128" />
-            <circle cx="155" cy="443" r="64" />
-          </g>
-        </svg>*/}
-      </div>
-
       <div
-          className="h-screen bg-cover bg-no-repeat"
-          style={{backgroundImage: "url(https://imgsrv2.voi.id/wB9BwjIkuwgNnzL1CEN1l891OcJwMjF-7ucmFe1BPI0/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy83MDY4LzIwMjAwNjEwMTQwNi1tYWluLmNyb3BwZWRfMTU5MTc3MjgxMi5qcGc.jpg)"}}>
-        <div className="h-screen w-full bg-gradient-to-tr from-white to-[#fffa] backdrop-sm ">      
+        className="h-screen bg-cover bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url(https://imgsrv2.voi.id/wB9BwjIkuwgNnzL1CEN1l891OcJwMjF-7ucmFe1BPI0/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy83MDY4LzIwMjAwNjEwMTQwNi1tYWluLmNyb3BwZWRfMTU5MTc3MjgxMi5qcGc.jpg)",
+        }}
+      >
+        <div className="h-screen w-full bg-gradient-to-tr from-white to-[#fffa] backdrop-sm ">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-
             {/* Hero content */}
-            <div className=" pb-12 md:pt-40 md:pb-20">
-
-              {/* Section header */}
-              <div className="mt-40  text-center pb-12 md:pb-16">
-                <h1 className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4" data-aos="zoom-y-out">Make your agribusiness <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">Easier</span></h1>
-                <div className="max-w-3xl mx-auto">
-                  <p className="text-xl text-gray-600 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Revolutionize your agribusiness with our cutting-edge agritechnology website. </p>
-                </div>
+            <div className="pt-40  text-center pb-12 md:pb-16">
+              <h1
+                className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
+                data-aos="zoom-y-out"
+              >
+                Kami melakukan deteksi{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+                  jalanan rusak
+                </span>
+                .
+              </h1>
+              <div className="max-w-3xl mx-auto">
+                <p
+                  className="text-2xl text-gray-700 mt-6"
+                  data-aos="zoom-y-out"
+                  data-aos-delay="150"
+                >
+                  Mulai dengan unggah video!
+                </p>
               </div>
             </div>
 
+            <label className="flex flex-col items-center justify-center mt-6" data-aos="zoom-y-out" data-aos-delay="300">
+              <input
+                type="file"
+                className="w-96 text-sm text-slate-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-gray-100 file:text-blue-700
+                  hover:file:bg-gray-200
+                "
+              />
+            </label>
+            <div
+              className="flex flex-col items-center justify-center mt-6"
+              data-aos="zoom-y-out"
+              data-aos-delay="450"
+            >
+              <button
+                onClick={()=> handleClick}
+                className="btn-sm text-gray-100 bg-teal-600 hover:bg-teal-800 disabled:opacity-40"
+                disabled
+              >
+                Upload Video
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
