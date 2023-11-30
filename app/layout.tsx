@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const metadata = {
   icons: {
-      icon: '@/public/favicon.png',
+    icon: '/favicon.ico',
   },
   title: 'Project Awan Berjalan',
   description: 'Tugas besar LTKA untuk deteksi jalanan yang rusak',

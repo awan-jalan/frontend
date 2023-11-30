@@ -16,7 +16,11 @@ export default function Result() {
         </div>
       </div>
 
-      <div className="h-screen w-full flex flex-col items-center justify-center" data-aos="zoom-y-out">
+      <div
+        className="h-screen w-full flex flex-col items-center justify-center"
+        data-aos="zoom-y-out"
+      >
+        <div className="text-2xl font-bold mb-8">Hasil Deteksi</div>
         <div>
           Jumlah Lubang: <span>{ini_hasil}</span>
         </div>
@@ -29,7 +33,9 @@ export default function Result() {
           </thead>
           <tbody>
             <tr className="border-b transition duration-200 ease-in-out hover:bg-neutral-50 hover:bg-opacity-50">
-              <td className="px-3 py-2">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+              <td className="px-3 py-2">
+                The Sliding Mr. Bones (Next Stop, Pottersville)
+              </td>
               <td className="px-3 py-2">Malcolm Lockyer</td>
             </tr>
             <tr className="border-b transition duration-200 ease-in-out hover:bg-neutral-50 hover:bg-opacity-50">
@@ -42,6 +48,12 @@ export default function Result() {
             </tr>
           </tbody>
         </table>
+        <a
+          className="btn-sm text-gray-100 bg-teal-600 hover:bg-teal-800 mt-8"
+          href=".\"
+        >
+          Ulangi Deteksi
+        </a>
       </div>
     </>
   );
