@@ -1,44 +1,85 @@
-import { useRouter } from "next/navigation";
+
+import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'react-router-dom';
 import { useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { toJsonImage} from "@/app/api/vertexAi/toJsonImage";
+import axios from "axios";
+import handler from "@/app/api/hello/route";
+
 
 export default function Hero() {
-  const route = useRouter();
-  const handleClick = (e: any) => {
+  const router = useRouter();
+  const handleClick = async (e: any) => {
+    if (files !== null) {
+      const postData = await toBase64(files).then((data) => {
+        return data
+      })
+
+      const response = await handler(postData)
+
+      await localStorage.setItem("file", postData.toString())
+      await localStorage.setItem("prediction",response)
+     router.push("./result")
+    }
     e.preventDefault();
-    route.push("./result");
+
+
   };
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
-  const [files, setFiles] = useState<any>([]);
+  const [files, setFiles] = useState<File | null>(null);
+  const toBase64 = (file: File) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
 
   function handleChange(e: any) {
     e.preventDefault();
     console.log("File has been added");
-    if (e.target.files && e.target.files[0]) {
-      for (let i = 0; i < e.target.files["length"]; i++) {
-        setFiles((prevState: any) => [...prevState, e.target.files[i]]);
-      }
+    if (!e.target.files) {
+      return;
     }
+
+    setFiles(e.target.files[0]);
+    // if (e.target.files && e.target.files[0]) {
+    //   for (let i = 0; i < e.target.files["length"]; i++) {
+    //     setFiles((prevState: any) => [...prevState, e.target.files[i]]);
+    //   }
+    // }
   }
 
-  function handleSubmitFile(e: any) {
-    if (files.length === 0) {
-      // no file has been submitted
-    } else {
-      // write submit logic here
-    }
-  }
+  // function handleSubmitFile(e: any) {
+  //   if (files.length === 0) {
+  //     // no file has been submitted
+  //   } else {
+  //     // write submit logic here
+  //   }
+  // }
 
   function handleDrop(e: any) {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      for (let i = 0; i < e.dataTransfer.files["length"]; i++) {
-        setFiles((prevState: any) => [...prevState, e.dataTransfer.files[i]]);
-      }
+    if (e.dataTransfer.files && e.dataTransfer.files[0]){
+      setFiles(e.dataTransfer.files[0])
     }
+    // if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+    //   for (let i = 0; i < e.dataTransfer.files["length"]; i++) {
+    //     setFiles((prevState: any) => [...prevState, e.dataTransfer.files[i]]);
+    //   }
+    // }
   }
 
   function handleDragLeave(e: any) {
@@ -60,9 +101,9 @@ export default function Hero() {
   }
 
   function removeFile(fileName: any, idx: any) {
-    const newArr = [...files];
-    newArr.splice(idx, 1);
-    setFiles([]);
+    const newArr = files;
+    //newArr.splice(idx, 1);
+    //setFiles([]);
     setFiles(newArr);
   }
 
@@ -135,9 +176,9 @@ export default function Hero() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                     />
                   </svg>
@@ -148,16 +189,23 @@ export default function Hero() {
                   <p className="text-xs text-gray-500">Menerima format MP4</p>
                 </div>
                 <div className="flex flex-col items-center p-3">
-                  {files.map((file: any, idx: any) => (
-                    <div key={idx} className="flex flex-row space-x-5">
-                      <span className="text-sm">{file.name}</span>
-                      <button
-                        onClick={() => removeFile(file.name,idx)}
-                      >
-                        <AiOutlineClose className="text-red-500" />
-                      </button>
+                  {files?
+                      <span className="text-sm">{files.name}</span>
+                      :
+                    <div>
+
                     </div>
-                  ))}
+                  }
+                  {/*{files.map((file: any, idx: any) => (*/}
+                  {/*  <div key={idx} className="flex flex-row space-x-5">*/}
+                  {/*    <span className="text-sm">{file.name}</span>*/}
+                  {/*    <button*/}
+                  {/*      onClick={() => removeFile(file.name,idx)}*/}
+                  {/*    >*/}
+                  {/*      <AiOutlineClose className="text-red-500" />*/}
+                  {/*    </button>*/}
+                  {/*  </div>*/}
+                  {/*))}*/}
                 </div>
               </label>
             </div>
@@ -165,7 +213,7 @@ export default function Hero() {
               <button
                 onClick={(e) => handleClick(e)}
                 className="btn-sm text-gray-100 bg-teal-600 hover:bg-teal-800 disabled:opacity-40"
-                disabled={files.length === 0}
+                disabled={files === null}
               >
                 Upload Video
               </button>

@@ -1,5 +1,31 @@
+'use client'
+import {useEffect, useState} from "react";
+import ImageWithPredictions from "@/components/ImageWithPredictions";
+
 export default function Result() {
-  const ini_hasil = 0;
+  const [result,setResult] = useState(0);
+  const [fileData,setFileData] = useState('')
+  const [prediction,setPrediction] = useState('')
+  useEffect(()=>{
+    try {
+      setFileData(localStorage.getItem("file") || "")
+      setPrediction(localStorage.getItem("prediction") || "")
+    } catch (error) {
+      console.log(error)
+    }
+  },[])
+
+  useEffect(()=>{
+    // console.log("file data",fileData)
+    if(prediction === ''){
+      return
+    }
+    const predictObj = JSON.parse(prediction)
+    setResult(result+predictObj.predictions[0].ids.length)
+    console.log("prediction",)
+  },[fileData,prediction])
+
+
   return (
     <>
       <div>
@@ -17,12 +43,12 @@ export default function Result() {
       </div>
 
       <div
-        className="h-screen w-full flex flex-col items-center justify-center"
+        className="w-full flex flex-col items-center justify-center"
         data-aos="zoom-y-out"
       >
         <div className="text-2xl font-bold mb-8">Hasil Deteksi</div>
         <div>
-          Jumlah Lubang: <span>{ini_hasil}</span>
+          Jumlah Lubang: <span>{result}</span>
         </div>
         <table className="table-auto mt-4">
           <thead>
@@ -34,17 +60,9 @@ export default function Result() {
           <tbody>
             <tr className="border-b transition duration-200 ease-in-out hover:bg-neutral-50 hover:bg-opacity-50">
               <td className="px-3 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
+                <ImageWithPredictions base64Image={fileData} predicString={JSON.stringify(prediction)} />
               </td>
-              <td className="px-3 py-2">Malcolm Lockyer</td>
-            </tr>
-            <tr className="border-b transition duration-200 ease-in-out hover:bg-neutral-50 hover:bg-opacity-50">
-              <td className="px-3 py-2">Witchy Woman</td>
-              <td className="px-3 py-2">The Eagles</td>
-            </tr>
-            <tr className="border-b transition duration-200 ease-in-out hover:bg-neutral-50 hover:bg-opacity-50">
-              <td className="px-3 py-2">Shining Star</td>
-              <td className="px-3 py-2">Earth, Wind, and Fire</td>
+              <td className="px-3 py-2">0:00:01</td>
             </tr>
           </tbody>
         </table>

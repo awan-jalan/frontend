@@ -1,13 +1,20 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    typescript: {
-        // !! WARN !!
-        // Dangerously allow production builds to successfully complete even if
-        // your project has type errors.
-        // !! WARN !!
-        ignoreBuildErrors: true,
-    },
-}
 
-module.exports = { nextConfig, 
-    output: 'standalone', }
+module.exports = {
+    nextConfig,
+    output: 'standalone',
+    webpack5: true,
+    webpack: (config) => {
+        config.resolve.fallback = {
+            fs: false,
+            path: false,
+            child_process:false,
+            net:false,
+            tls:false
+        };
+        return config;
+    },
+    typescript: {
+        ignoreBuildErrors: true
+    }
+}

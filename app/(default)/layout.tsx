@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { SessionProvider } from "next-auth/react";
 
 
 export default function DefaultLayout({
@@ -24,9 +25,9 @@ export default function DefaultLayout({
   return (
     <>
       <main className="">
-
+        {/*<SessionProvider session={pageProps.session}>*/}
         {children}
-
+        {/*</SessionProvider>*/}
       </main>
 
     </>
