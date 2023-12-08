@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c6eabb2-0a5d-487b-9f77-9ccdb9aced43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/(default)/result/frameTable/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/auth/[...nextauth].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/vertexAi/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/vertexAi/toJsonImage.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/ImageWithPredictions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(default)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(default)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(default)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(default)/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(default)/result/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(default)/result/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/hello/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/hello/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/hero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/hero.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +50,7 @@
       <recent name="C:\Users\Agil\WebstormProjects\awan-jalan\frontend\app\(default)\result\[imageData]\[prediction]" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -86,8 +73,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -104,7 +91,8 @@
       <workItem from="1700208928431" duration="2382000" />
       <workItem from="1700325993062" duration="9000" />
       <workItem from="1701939709784" duration="6213000" />
-      <workItem from="1701954079690" duration="17241000" />
+      <workItem from="1701954079690" duration="17608000" />
+      <workItem from="1701993481588" duration="191000" />
     </task>
     <servers />
   </component>

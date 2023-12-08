@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
-    nextConfig,
     output: 'standalone',
     webpack5: true,
     webpack: (config) => {
