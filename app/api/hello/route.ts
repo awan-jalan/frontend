@@ -20,7 +20,7 @@ export default async function handler(content) {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://us-central1-aiplatform.googleapis.com/v1/projects/48414764875/locations/us-central1/endpoints/2807442412828360704:predict',
+      url: `https://us-central1-aiplatform.googleapis.com/v1/projects/${process.env.NEXT_PUBLIC_PROJECT_ID}/locations/us-central1/endpoints/${process.env.NEXT_PUBLIC_ENDPOINT_ID}:predict`,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer '+process.env.NEXT_PUBLIC_TOKEN.toString()
@@ -46,8 +46,8 @@ export default async function handler(content) {
 async function refreshAccessToken() {
   const response = await axios.post('https://accounts.google.com/o/oauth2/token', {
     grant_type: 'refresh_token',
-    client_id: '48414764875-3ng54q5g1mvlap4f94t355fh4u9fuqv3.apps.googleusercontent.com',
-    client_secret: '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',
+    client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+    client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
     refresh_token: 'YOUR_REFRESH_TOKEN',
   });
 
