@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default async function handler(content) {
-  console.log(process.env.TOKEN)
+  console.log(process.env.NEXT_PUBLIC_TOKEN)
   try {
     const axios = require('axios');
     content = content.slice(23)
@@ -23,7 +23,7 @@ export default async function handler(content) {
       url: 'https://us-central1-aiplatform.googleapis.com/v1/projects/48414764875/locations/us-central1/endpoints/2807442412828360704:predict',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+'ya29.a0AfB_byA9odcXmRfPRE31-0NKRknhdRo4O3HkQGCOMUfZdDiF9r3w1xfDLWTa85NQ4HlT1EUr68DrRBRup7t8Jan5JLiaeo9TIqfXSsZwa6zFvM4nksFC6cf1cCUaiy63LaxvBsmB61wkYDkOAQaNtjX5t8uz2IMcRl_O6ENrXpEaCgYKAXcSARESFQHGX2MiN8J1DysBEV2IEHPKLUeHAw0178'
+        'Authorization': 'Bearer '+process.env.NEXT_PUBLIC_TOKEN.toString()
 
       },
       data : data
