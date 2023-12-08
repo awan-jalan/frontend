@@ -5,7 +5,7 @@ const ImageWithPredictions = ({ base64Image, predicString }) => {
     const canvasRef = useRef(null);
 
     useEffect(() => {
-        if(predicString === undefined || predicString.length === 2){
+        if(predicString === undefined || predicString.length === 2 || predicString === ""){
             return
         }
 

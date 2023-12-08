@@ -1,39 +1,65 @@
 'use client'
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+import ImageWithPredictions from "@/components/ImageWithPredictions";
 
 const Page = () => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
+
     const [frames, setFrames] = useState([]);
+    const [videoFile, setVideoFile] = useState(null);
 
-    const handleExtractFrames = () => {
-        const video = videoRef.current;
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setVideoFile(selectedFile);
+    };
+    useEffect(()=>{
         const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
 
-        const frameWidth = video.videoWidth;
-        const frameHeight = video.videoHeight;
+    },[frames])
+    const handleExtractFrames = async () => {
+        if (videoFile) {
+            const video = videoRef.current;
+            video.src = URL.createObjectURL(videoFile);
 
-        canvas.width = frameWidth;
-        canvas.height = frameHeight;
+            await new Promise((resolve) => {
+                video.onloadedmetadata = resolve;
+            });
 
-        const extractedFrames = [];
-        const totalFrames = Math.floor(video.duration * video.getAttribute('fps'));
-        for (let i = 0; i < totalFrames; i++) {
-            video.currentTime = i / video.getAttribute('fps');
-            context.drawImage(video, 0, 0, frameWidth, frameHeight);
+            const canvas = canvasRef.current;
+            const context = canvas.getContext('2d');
+            const frameWidth = video.videoWidth;
+            const frameHeight = video.videoHeight;
 
-            const frameDataURL = canvas.toDataURL('image/png');
-            extractedFrames.push(frameDataURL);
+            canvas.width = frameWidth;
+            canvas.height = frameHeight;
+
+            const extractedFrames = [];
+            const totalFrames = Math.floor(video.duration * video.getAttribute('fps'));
+            for (let i = 0; i < totalFrames; i++) {
+                video.currentTime = i / video.getAttribute('fps');
+                await new Promise((resolve) => {
+                    video.onseeked = resolve;
+                });
+                context.drawImage(video, 0, 0, frameWidth, frameHeight);
+
+                const frameDataURL = canvas.toDataURL('image/png');
+                extractedFrames.push(frameDataURL);
+                console.log(frameDataURL.toString())
+            }
+
+            setFrames(extractedFrames);
         }
-
-        setFrames(extractedFrames);
     };
 
     return (
-        <div>
-            <video ref={videoRef} src="path/to/video.mp4" fps="30" controls />
-            <canvas ref={canvasRef} style={{ display: 'none' }} />
+        <div className="min-w-full mt-20">
+            <input type="file" accept="video/*" id="videoInput" onChange={handleFileChange} />
+
+            {/* Video element with dynamic source based on the selected file */}
+            <video ref={videoRef as any} fps="30" />
+            <canvas ref={canvasRef as any} style={{ display: 'none' }} />
             <button onClick={handleExtractFrames}>Extract Frames</button>
 
             {frames.length > 0 && (
@@ -49,7 +75,7 @@ const Page = () => {
                         <tr key={index}>
                             <td>Frame {index + 1}</td>
                             <td>
-                                <img src={frameDataURL} alt={`Frame ${index + 1}`} />
+                                <ImageWithPredictions base64Image={frameDataURL} predicString={""} />
                             </td>
                         </tr>
                     ))}
